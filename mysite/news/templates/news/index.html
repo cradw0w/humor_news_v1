@@ -37,15 +37,25 @@
                     Категория: <b> {{ item.category }} </b>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">{{ item.title }}</h5>
-                    <p class="card-text">{{ item.content }}</p>
-                    <a href="#" class="btn btn-primary">Читать далее</a>
+                    <div class="media">
+                        {% if item.photo %}
+                        <img src="{{ item.photo.url }}" alt = '' width="300" class="mr-3">
+                        {% else %}
+                        <img src="https://nkz.a-si.ru/img/no-photo.jpg" alt = '' width="300" class="mr-3">
+                        {% endif %}
+                        <div class="media-body">
+                            <h5 class="card-title {% cycle 'text-danger' 'text-success' %}">{{ item.title }}</h5>
+                            <p class="card-text">{{ item.content }}</p>
+                            <a href="#" class="btn btn-primary">Читать далее</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-footer text-muted">
                     {{ item.created_ad|date:"Y-m-d H:i" }}
-                    <b>Был добавлен некоторый текст для тренировки коммита</b>
                 </div>
             </div>
+            {% empty %}
+            Упс.. объектов не найдено..
             {% endfor %}
         </div>
     </div>
